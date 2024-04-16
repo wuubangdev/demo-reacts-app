@@ -26,7 +26,7 @@ class AddUser extends React.Component {
     }
     render() {
         return (
-            <div>
+            <>
                 my name is {this.state.name} and i'm {this.state.age}
                 <form onSubmit={(event)=>this.handleOnSubmit(event)}>
                     <label>Your name:</label>
@@ -44,7 +44,7 @@ class AddUser extends React.Component {
                     /> 
                     <button>submit</button>
                 </form>
-            </div>
+            </>
         );
     }
 }

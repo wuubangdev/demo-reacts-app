@@ -13,9 +13,8 @@ class DisplayInfor extends React.Component {
     render() {
         const {listUsers} = this.props;
         return (
-            <React.Fragment>
+            <>
             <div className="display-infor-container">
-                <img src = {logo} alt=""/>
                 <>
                     <span onClick={()=>{this.handleShowHide()}}>{this.state.isShowListUser?"Hide ":"Show "}list user:</span>
                 </>
@@ -26,13 +25,14 @@ class DisplayInfor extends React.Component {
                             <div key={user.id} className={(+user.age>=18)?"green":"red"}>
                                 <div>My name is {user.name}</div>
                                 <div>I am years old {user.age}</div>
+                                <button onClick={()=>{this.props.handleDeleteUser(user.id)}}>Delete</button>
                                 <hr/> 
                             </div>
                         )
                     })}
                 </>}
             </div>
-            </React.Fragment>
+            </>
         );
     }
 }
