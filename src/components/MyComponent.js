@@ -18,7 +18,8 @@ class MyComponent extends React.Component {
     }
     render() {
         return (
-            <div>
+            <React.Fragment>
+            <>
                 <AddUser
                 handleAddNewUser = {this.handleAddNewUser}
                 />
@@ -26,7 +27,8 @@ class MyComponent extends React.Component {
                 <DisplayInfor 
                 listUsers={this.state.listUsers}
                 />
-            </div>
+            </>
+            </React.Fragment>
         );
     }
 }
