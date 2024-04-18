@@ -1,52 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
-class AddUser extends React.Component {
-    state = {
-        name: '',
-        age: '',
-        address: ''
-    };
-    handleInput = (event) => {
-        this.setState({
-            name: event.target.value
-        })
+
+
+const AddUser = (props) => {
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
+    const [address, setAddress] = useState('Ca mau');
+    
+    const  handleInput = (event) => {
+        setName(event.target.value);
     }
-    handleAge = (event) => {
-        this.setState({
-            age: event.target.value
-        })
+
+    const handleAge = (event) => {
+        setAge(event.target.value);
     }
-    handleOnSubmit = (event) => {
+    const handleOnSubmit = (event) => {
         event.preventDefault();
-        this.props.handleAddNewUser({
+        props.handleAddNewUser({
             id: Math.floor(Math.random()*100+1) + "-random",
-            name: this.state.name,
-            age: this.state.age
+            name: name,
+            age: age
         })
     }
-    render() {
-        return (
-            <>
-                my name is {this.state.name} and i'm {this.state.age}
-                <form onSubmit={(event)=>this.handleOnSubmit(event)}>
+    return (
+        <>
+            my name is {name} and i'm {age}
+                <form onSubmit={(event)=>handleOnSubmit(event)}>
                     <label>Your name:</label>
                     <input type ="text"
-                    value= {this.state.name}
-                    onInput={(e)=>{this.handleInput(e)}}
-                    /> 
-                    <button>submit</button>
-                </form>
-                <form onSubmit={(event)=>this.handleOnSubmit(event)}>
-                    <label>Your age:</label>
-                    <input type ="text"
-                    value= {this.state.age}
-                    onInput={(e)=>{this.handleAge(e)}}
-                    /> 
-                    <button>submit</button>
-                </form>
-            </>
-        );
-    }
+                value= {name}
+                onInput={(e)=>{handleInput(e)}}
+                /> 
+                <button>submit</button>
+            </form>
+            <form onSubmit={(event)=>handleOnSubmit(event)}>
+                <label>Your age:</label>
+                <input type ="text"
+                value= {age}
+                onInput={(e)=>{handleAge(e)}}
+                /> 
+                <button>submit</button>
+            </form>
+        </>
+    );
 }
 
 export default AddUser;
