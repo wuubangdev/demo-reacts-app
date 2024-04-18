@@ -5,7 +5,6 @@ import React, { useState } from "react";
 const AddUser = (props) => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
-    const [address, setAddress] = useState('Ca mau');
     
     const  handleInput = (event) => {
         setName(event.target.value);

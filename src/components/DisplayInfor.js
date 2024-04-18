@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import './DisplayInfo.scss';
-import logo from '../logo.svg';
 
 const DisplayInfor = (props) => {
     const {listUsers} = props;
