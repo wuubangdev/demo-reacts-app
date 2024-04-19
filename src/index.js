@@ -12,12 +12,14 @@ import {
 } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import Admin from "./components/Admin/Admin";
+import HomePage from "./components/Home/HomePage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <HomePage /> },
       {
         path: "/users",
         element: <User />,
