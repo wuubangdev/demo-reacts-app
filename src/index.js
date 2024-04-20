@@ -13,7 +13,10 @@ import {
 import ErrorPage from "./components/ErrorPage";
 import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
+import DashBoard from "./components/Admin/content/DashBoard";
+import ManageUser from "./components/Admin/content/ManageUser";
 const router = createBrowserRouter([
+  //Home
   {
     path: "/",
     element: <App />,
@@ -21,14 +24,23 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "/users",
+        path: "users",
         element: <User />,
       }
     ]
   },
+  //Admin
   {
     path: "/admins",
     element: <Admin />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <DashBoard /> },
+      {
+        path: "manage-users",
+        element: <ManageUser />,
+      }
+    ]
   }
 ]);
 
