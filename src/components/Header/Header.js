@@ -17,12 +17,14 @@ const Header = (props) => {
             <NavLink className="nav-link" to="/admins">Admin</NavLink>
           </Nav>
           <Nav>
-            <NavDropdown title="Setting" id="basic-nav-dropdown">
+            <button className="btn-login">Login</button>
+            <button className="btn-signup">Sign up</button>
+            {/* <NavDropdown title="Setting" id="basic-nav-dropdown">
               <NavDropdown.Item>Login</NavDropdown.Item>
               <NavDropdown.Item>Logout</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>Profile</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
