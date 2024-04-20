@@ -1,16 +1,27 @@
+import axios from 'axios';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 
 const ModalCreateUser = (props) => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const { show, setShow } = props;
+    const handleClose = () => {
+        setShow(false);
+        setEmail("");
+        setPassword("");
+        setUserName("");
+        setRole("USER");
+        setImage("");
+        setPreviewImage("");
+    }
+    const handleShow = () => {
+        setShow(true);
+    };
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [userName, setUserName] = useState("");
+    const [username, setUserName] = useState("");
     const [role, setRole] = useState("USER");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState(false);
@@ -20,12 +31,26 @@ const ModalCreateUser = (props) => {
             setImage(e.target.files[0]);
         }
     }
+    const handleSubmitForm = async () => {
+        //Validate
 
+        //call api
+        const data = new FormData();
+        data.append('email', email);
+        data.append('password', password);
+        data.append('username', username);
+        data.append('role', role);
+        data.append('userImage', image);
+
+        let res = await axios.post('http://localhost:8081/api/v1/participant', data);
+        console.log(">>>>Check res: ", res);
+
+    }
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Launch demo modal
-            </Button>
+            </Button> */}
 
             <Modal
                 show={show}
@@ -62,7 +87,7 @@ const ModalCreateUser = (props) => {
                             <input
                                 type="text"
                                 className="form-control"
-                                value={userName}
+                                value={username}
                                 onChange={(e) => { setUserName(e.target.value) }}
                             />
                         </div>
@@ -98,7 +123,7 @@ const ModalCreateUser = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={() => handleSubmitForm()}>
                         Save
                     </Button>
                 </Modal.Footer>

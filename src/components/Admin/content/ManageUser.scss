@@ -1,5 +1,22 @@
 .manage-user-container {
-    .user-content {}
+    padding: 10px;
+
+    .title {
+        font-weight: 600;
+        font-size: 20px;
+
+    }
+
+    .user-content {
+        .btn-add-new {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-user-container {}
+    }
 }
 
 .modal-add-user {
