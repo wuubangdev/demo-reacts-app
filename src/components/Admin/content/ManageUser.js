@@ -2,7 +2,7 @@ import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { FcPlus } from 'react-icons/fc';
 import { useEffect, useState } from "react";
-import TableUser from "./TableUser";
+//import TableUser from "./TableUser";
 import { getAllUser, getAllUserPagination } from "../../../services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalUserDetail from "./ModalUserDetail";
@@ -11,7 +11,7 @@ import TableUserPagination from "./TableUserPagination";
 
 
 const ManageUser = (props) => {
-    const LIMIT_USER = 6;
+    const LIMIT_USER = 2;
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [showModalUserDetail, setShowModalUserDetail] = useState(false);
