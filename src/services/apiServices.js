@@ -20,4 +20,9 @@ const putUpdateUser = (id, username, role, image) => {
     data.append('userImage', image);
     return axios.put('api/v1/participant', data);
 }
-export { postCreateNewUser, getAllUser, putUpdateUser };
+const deleteUser = (id) => {
+    const params = new URLSearchParams({ foo: 'bar' });
+    params.append('id', id);
+    return axios.delete('api/v1/participant', id);
+}
+export { postCreateNewUser, getAllUser, putUpdateUser, deleteUser };
