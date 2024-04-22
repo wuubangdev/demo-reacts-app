@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
-import { postCreateNewUser } from '../../../services/apiServices';
+import { putUpdateUser } from '../../../services/apiServices';
 import _ from 'lodash';
 const ModalUpdateUser = (props) => {
-    const { show, setShow, fetchListUser, dataUpdate } = props;
+    const { show, setShow, fetchListUser, dataUpdate, setDataUpdate } = props;
     const handleClose = () => {
         setShow(false);
         setEmail("");
@@ -15,6 +15,7 @@ const ModalUpdateUser = (props) => {
         setRole("USER");
         setImage("");
         setPreviewImage("");
+        setDataUpdate({});
     }
     const handleShow = () => {
         setShow(true);
@@ -44,25 +45,8 @@ const ModalUpdateUser = (props) => {
             setImage(e.target.files[0]);
         }
     }
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
     const handleSubmitForm = async () => {
-        //Validate
-        const isValidEmail = validateEmail(email);
-        if (!isValidEmail) {
-            toast.error("Invalid email");
-            return;
-        }
-        if (!password) {
-            toast.error("Invalid password");
-            return;
-        }
-        let data = await postCreateNewUser(email, password, username, role, image);
+        let data = await putUpdateUser(dataUpdate.id, username, role, image);
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
@@ -84,7 +68,7 @@ const ModalUpdateUser = (props) => {
                 onHide={handleClose}
                 size="xl"
                 backdrop="static"
-                className='modal-add-user'
+                className='modal-user'
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Update user</Modal.Title>
@@ -141,6 +125,7 @@ const ModalUpdateUser = (props) => {
                         </div>
                         <div className="col-md-12 img-preview">
                             {previewImage ?
+                                // eslint-disable-next-line jsx-a11y/alt-text
                                 <img src={previewImage} />
                                 : <span>Preview Image</span>
                             }
