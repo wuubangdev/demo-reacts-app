@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { putUpdateUser } from '../../../services/apiServices';
 import _ from 'lodash';
 const ModalUpdateUser = (props) => {
-    const { show, setShow, fetchListUser, dataUpdate, setDataUpdate } = props;
+    const { show, setShow, fetchListUser, dataUpdate, setDataUpdate, fetchListUserPagination, forcePage } = props;
     const handleClose = () => {
         setShow(false);
         setEmail("");
@@ -50,7 +50,8 @@ const ModalUpdateUser = (props) => {
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
-            await fetchListUser();
+            //await fetchListUser();
+            await fetchListUserPagination(forcePage);
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);

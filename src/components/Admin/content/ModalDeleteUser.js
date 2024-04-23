@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import { deleteUser } from '../../../services/apiServices';
 import { toast } from 'react-toastify';
 
-function ModalDeteleUser(props) {
-    const { show, setShow, dataDelete, fetchListUser } = props;
+function ModalDeleteUser(props) {
+    const { show, setShow, dataDelete, fetchListUser, fetchListUserPagination, setForcePage } = props;
 
     const handleClose = () => setShow(false);
 
@@ -13,7 +13,9 @@ function ModalDeteleUser(props) {
         if (data && data.EC === 0) {
             handleClose();
             toast.success(data.EM);
-            await fetchListUser();
+            //await fetchListUser();
+            await fetchListUserPagination(1);
+            setForcePage(1);
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);
@@ -43,4 +45,4 @@ function ModalDeteleUser(props) {
     );
 }
 
-export default ModalDeteleUser;
+export default ModalDeleteUser;
