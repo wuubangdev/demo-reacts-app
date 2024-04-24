@@ -22,7 +22,7 @@ const Admin = (props) => {
                     <Outlet />
                 </div>
             </div>
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -33,7 +33,7 @@ const Admin = (props) => {
                 draggable
                 pauseOnHover
                 theme="light"
-            />
+            /> */}
         </div>
     )
 }

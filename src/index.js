@@ -15,6 +15,8 @@ import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
 import DashBoard from "./components/Admin/content/DashBoard";
 import ManageUser from "./components/Admin/content/ManageUser";
+import Login from "./components/Auth/Login";
+import { ToastContainer } from "react-toastify";
 const router = createBrowserRouter([
   //Home
   {
@@ -41,6 +43,11 @@ const router = createBrowserRouter([
         element: <ManageUser />,
       }
     ]
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <ErrorPage />
   }
 ]);
 
@@ -49,6 +56,18 @@ root.render(
   <Provider store={store}>
     {/* <React.StrictMode> */}
     <RouterProvider router={router} />
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     {/* </React.StrictMode> */}
   </Provider>
 );
