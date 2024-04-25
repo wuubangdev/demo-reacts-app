@@ -28,6 +28,7 @@ const getAllUserPagination = (page, limit) => {
     return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 }
 const userLogin = (email, password) => {
-    return axios.post('api/v1/login', { email, password });
+    const delay = 5000;
+    return axios.post('api/v1/login', { email, password, delay });
 }
 export { postCreateNewUser, getAllUser, putUpdateUser, deleteUser, getAllUserPagination, userLogin };

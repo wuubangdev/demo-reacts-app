@@ -46,10 +46,33 @@
             background-color: black;
             color: #ccc;
         }
+
+        &:disabled {
+            background-color: #7e7b7b;
+            border: none;
+            cursor: no-drop;
+        }
     }
 
     .forgot-pass {
         font-size: 14px;
+    }
+
+    .spinner-icon {
+        margin-right: 7px;
+        top: 2px;
+        color: aqua;
+        animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0deg);
+        }
+
+        to {
+            transform: scale(1) rotate(360deg);
+        }
     }
 }
 

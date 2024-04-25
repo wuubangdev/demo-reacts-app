@@ -4,11 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { userLogin } from '../../services/apiServices';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { ImSpinner10 } from 'react-icons/im'
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
@@ -27,14 +31,20 @@ const Login = () => {
             return;
         }
 
-        console.log(email, password)
+        setIsLoading(true)
         let data = await userLogin(email, password);
-        console.log(data)
         if (data && data.EC === 0) {
+            dispatch({
+                type: "FETCH_USER_LOGIN_SUCCESS",
+                payload: data,
+            });
             toast.success(data.EM);
+            setIsLoading(false);
+            navigate('/');
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);
+            setIsLoading(false);
         }
     }
     return (
@@ -67,7 +77,13 @@ const Login = () => {
                     />
                 </div>
                 <Link className='forgot-pass' to=''>Forgot password?</Link>
-                <button className='btn' onClick={() => handleSubmitLogin()}>Login</button>
+                <button
+                    className='btn'
+                    disabled={isLoading}
+                    onClick={() => handleSubmitLogin()}>
+                    {isLoading && <ImSpinner10 className='spinner-icon' />}
+                    Login
+                </button>
             </div>
             <div className='login-footer col-4 mx-auto text-center' onClick={() => navigate('/')}> &#60; &#60; &#60; Back to Homepage</div>
         </div>
