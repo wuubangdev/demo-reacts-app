@@ -19,6 +19,7 @@ import DashBoard from "./components/Admin/content/DashBoard";
 import ManageUser from "./components/Admin/content/ManageUser";
 import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
+import ListQuiz from "./components/User/ListQuiz";
 const router = createBrowserRouter([
   //Home
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       {
         path: "users",
-        element: <User />,
+        element: <ListQuiz />,
       }
     ]
   },
