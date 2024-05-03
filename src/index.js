@@ -20,6 +20,7 @@ import ManageUser from "./components/Admin/content/ManageUser";
 import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import ListQuiz from "./components/User/ListQuiz";
+import QuizDetail from "./components/User/QuizDetail";
 const router = createBrowserRouter([
   //Home
   {
@@ -51,7 +52,13 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     errorElement: <ErrorPage />
-  }
+  },
+  {
+    path: "/quiz/:id",
+    element: <QuizDetail />,
+    errorElement: <ErrorPage />
+  },
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
