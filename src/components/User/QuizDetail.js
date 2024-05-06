@@ -4,9 +4,12 @@ import { useLocation, useParams } from 'react-router-dom';
 import _ from 'lodash';
 import './QuizDetail.scss';
 import Question from './Question';
+import ModalTotalQuest from './ModalTotalQuest';
 const QuizDetail = () => {
     const [quizContent, setQuizContent] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+    const [totalResult, setTotalResult] = useState({});
     const params = useParams();
     const quizId = params.id;
     useEffect(() => {
@@ -91,8 +94,9 @@ const QuizDetail = () => {
         }
         payload.answers = answers;
         let res = await postSubmitQuiz(payload);
-        if (res.DT && res.EC === 0) {
-
+        if (res && res.EC === 0) {
+            setShowModal(true);
+            setTotalResult(res.DT)
         }
     }
     return (
@@ -136,6 +140,11 @@ const QuizDetail = () => {
             <div className="right-content">
                 count down
             </div>
+            <ModalTotalQuest
+                show={showModal}
+                setShow={setShowModal}
+                totalResult={totalResult}
+            />
         </div>
     )
 }
