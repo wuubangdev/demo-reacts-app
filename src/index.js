@@ -7,7 +7,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'nprogress/nprogress.css';
-import User from './components/User/User';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,6 +20,7 @@ import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import ListQuiz from "./components/User/ListQuiz";
 import QuizDetail from "./components/User/QuizDetail";
+import QuizManager from "./components/Admin/content/Quiz/QuizManager";
 const router = createBrowserRouter([
   //Home
   {
@@ -45,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <ManageUser />,
+      },
+      {
+        path: "manage-quizzes",
+        element: <QuizManager />,
       }
     ]
   },
