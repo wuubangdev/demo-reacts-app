@@ -5,7 +5,7 @@ import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 import { postCreateNewUser } from '../../../services/apiServices';
 const ModalCreateUser = (props) => {
-    const { show, setShow, fetchListUser, fetchListUserPagination, setForcePage } = props;
+    const { show, setShow, fetchListUserPagination, setForcePage } = props;
     const handleClose = () => {
         setShow(false);
         setEmail("");
@@ -15,9 +15,6 @@ const ModalCreateUser = (props) => {
         setImage("");
         setPreviewImage("");
     }
-    const handleShow = () => {
-        setShow(true);
-    };
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

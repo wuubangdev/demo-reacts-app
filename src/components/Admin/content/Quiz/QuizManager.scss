@@ -2,13 +2,13 @@
     padding: 15px;
 
     .title {
-        font-size: 27px;
+        font-size: 20px;
         font-weight: 600;
     }
 
     .add-new {
         legend {
-            font-size: 13px;
+            font-size: 16px;
         }
 
         .img-preview {
@@ -44,5 +44,12 @@
 
     }
 
-    .list-detail {}
+    .list-detail {
+
+
+        .table-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
 }

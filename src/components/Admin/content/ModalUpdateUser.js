@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { putUpdateUser } from '../../../services/apiServices';
 import _ from 'lodash';
 const ModalUpdateUser = (props) => {
-    const { show, setShow, fetchListUser, dataUpdate, setDataUpdate, fetchListUserPagination, forcePage } = props;
+    const { show, setShow, dataUpdate, setDataUpdate, fetchListUserPagination, forcePage } = props;
     const handleClose = () => {
         setShow(false);
         setEmail("");
@@ -17,9 +17,6 @@ const ModalUpdateUser = (props) => {
         setPreviewImage("");
         setDataUpdate({});
     }
-    const handleShow = () => {
-        setShow(true);
-    };
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

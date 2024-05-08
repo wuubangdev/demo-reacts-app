@@ -3,28 +3,28 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import _ from 'lodash';
 import { Card, ListGroup } from 'react-bootstrap';
-const ModalUserDetail = (props) => {
+const ModalShowQuiz = (props) => {
     const { show, setShow, dataView, setDataView } = props;
 
     const handleClose = () => {
         setShow(false);
-        setEmail("");
-        setUserName("");
-        setRole("USER");
+        setName("");
+        setDescription("");
+        setType("EASY");
         setPreviewImage("");
         setDataView({});
     }
 
-    const [email, setEmail] = useState("");
-    const [username, setUserName] = useState("");
-    const [role, setRole] = useState("USER");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [type, setType] = useState("EASY");
     const [previewImage, setPreviewImage] = useState(false);
 
     useEffect(() => {
         if (!_.isEmpty(dataView)) {
-            setEmail(dataView.email);
-            setUserName(dataView.username);
-            setRole(dataView.role);
+            setName(dataView.name);
+            setDescription(dataView.description);
+            setType(dataView.difficulty);
             if (dataView.image) {
                 setPreviewImage(`data:image/jpeg;base64,${dataView.image}`);
             }
@@ -58,9 +58,9 @@ const ModalUserDetail = (props) => {
                             }
                             <Card.Body>
                                 <ListGroup>
-                                    <ListGroup.Item>Email: {email}</ListGroup.Item>
-                                    <ListGroup.Item>Username: {username}</ListGroup.Item>
-                                    <ListGroup.Item>Role: {role}</ListGroup.Item>
+                                    <ListGroup.Item>Name: {name}</ListGroup.Item>
+                                    <ListGroup.Item>Description: {description}</ListGroup.Item>
+                                    <ListGroup.Item>Type: {type}</ListGroup.Item>
                                 </ListGroup>
                             </Card.Body>
                         </Card>
@@ -76,4 +76,4 @@ const ModalUserDetail = (props) => {
     );
 }
 
-export default ModalUserDetail;
+export default ModalShowQuiz;
