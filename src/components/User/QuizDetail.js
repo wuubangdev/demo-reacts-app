@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getQuizData } from '../../services/apiServices';
 import { useLocation, useParams } from 'react-router-dom';
 import _ from 'lodash';
 import './QuizDetail.scss';
+import Question from './Question';
 const QuizDetail = () => {
-    const [detailQuiz, setDetailQuiz] = useState([])
-    const params = useParams()
+    const params = useParams();
     const quizId = params.id;
     useEffect(() => {
-        fetchQuestions();
+        fetchQuestions()
     }, [quizId])
     const location = useLocation();
     const fetchQuestions = async () => {
@@ -53,14 +53,7 @@ const QuizDetail = () => {
                     <img src="" alt="" />
                 </div>
                 <div className='q-content'>
-                    <div className="question">
-                        Question 1:  How are you doing?
-                    </div>
-                    <div className="answer">
-                        <div className="answer-detail">A. asdas</div>
-                        <div className="answer-detail">B. qwdsadas</div>
-                        <div className="answer-detail">C. asdasdas</div>
-                    </div>
+                    <Question />
                 </div>
                 <div className='q-footer'>
                     <button className='btn btn-primary'>Prev</button>
