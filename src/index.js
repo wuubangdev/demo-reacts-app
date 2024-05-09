@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'nprogress/nprogress.css';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import ListQuiz from "./components/User/ListQuiz";
 import QuizDetail from "./components/User/QuizDetail";
 import QuizManager from "./components/Admin/content/Quiz/QuizManager";
+import QuestionManager from "./components/Admin/content/Question/QuestionManager";
 const router = createBrowserRouter([
   //Home
   {
@@ -49,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "manage-quizzes",
         element: <QuizManager />,
+      },
+      {
+        path: "manage-questions",
+        element: <QuestionManager />,
       }
     ]
   },

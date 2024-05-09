@@ -1,5 +1,6 @@
 .admin-container {
     display: flex;
+    overflow: hidden;
 
     .admin-sidebar {
         .pro-sidebar {
@@ -14,6 +15,8 @@
             height: 40px;
         }
 
-        .admin-main {}
+        .admin-main {
+            height: calc(100vh - 40px);
+        }
     }
 }

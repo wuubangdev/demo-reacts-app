@@ -1,8 +1,8 @@
 import { FcPlus } from 'react-icons/fc';
 import './QuizManager.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { postSubmitCreateQuiz } from '../../../../services/apiServices';
+import { getAllQuizAdmin, postSubmitCreateQuiz } from '../../../../services/apiServices';
 import { toast } from 'react-toastify';
 import QuizDetailTable from './QuizDetailTable';
 import Accordion from 'react-bootstrap/Accordion';
@@ -20,10 +20,22 @@ const QuizManager = (props) => {
     const [type, setType] = useState('EASY');
     const [image, setImage] = useState(null);
 
+    const [listQuiz, setListQuiz] = useState([]);
+
     const handleUploadImage = (e) => {
         if (e.target && e.target.files && e.target.files[0]) {
             setPreviewImage(URL.createObjectURL(e.target.files[0]));
             setImage(e.target.files[0]);
+        }
+    }
+    useEffect(() => {
+        fetchAllQuiz();
+    }, []);
+
+    const fetchAllQuiz = async () => {
+        let res = await getAllQuizAdmin();
+        if (res && res.EC === 0) {
+            setListQuiz(res?.DT);
         }
     }
     const handleSubmitCreateQuiz = async () => {
@@ -34,6 +46,11 @@ const QuizManager = (props) => {
         let res = await postSubmitCreateQuiz(description, name, type?.value, image);
         if (res && res.EC === 0) {
             toast.success(res.EM);
+            setName('');
+            setDescription('');
+            setType('');
+            setPreviewImage('');
+            fetchAllQuiz();
         }
         if (res && res.EC !== 0) {
             toast.error(res.EM);
@@ -102,7 +119,9 @@ const QuizManager = (props) => {
             <hr />
             <div className="list-detail">
                 <QuizDetailTable
-
+                    listQuiz={listQuiz}
+                    setListQuiz={setListQuiz}
+                    fetchAllQuiz={fetchAllQuiz}
                 />
             </div>
         </div>

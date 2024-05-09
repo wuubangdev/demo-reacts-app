@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
-import { getAllQuizAdmin, getQuizById } from "../../../../services/apiServices";
+import { useState } from "react";
+import { getQuizById } from "../../../../services/apiServices";
+import { toast } from "react-toastify";
 import ModalDeleteQuiz from "./Modal/ModalDeleteQuiz";
 import ModalShowQuiz from "./Modal/ModalShowQuiz";
-import { toast } from "react-toastify";
+import ModalEditQuiz from './Modal/ModalEditQuiz';
 
 const QuizDetailTable = (props) => {
 
-    const [listQuiz, setListQuiz] = useState([]);
+    const { listQuiz, fetchAllQuiz } = props;
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [idDelete, setIdDelete] = useState(null);
 
     const [showShowQuizModal, setShowShowQuizModal] = useState(false);
     const [dataView, setDataView] = useState({})
 
-    useEffect(() => {
-        fetchAllQuiz();
-    }, []);
+    const [showShowEditModal, setShowShowEditModal] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState({})
 
-    const fetchAllQuiz = async () => {
-        let res = await getAllQuizAdmin();
-        if (res && res.EC === 0) {
-            setListQuiz(res?.DT);
-        }
-    }
     const handleClickDelete = (id) => {
         setShowDeleteModal(true);
         setIdDelete(id);
@@ -38,12 +32,22 @@ const QuizDetailTable = (props) => {
             toast.error(res.EM);
         }
     }
+    const handleClickEdit = async (id) => {
+        setShowShowEditModal(true);
+        let res = await getQuizById(id);
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+            setDataUpdate(res?.DT);
+        } else {
+            toast.error(res.EM);
+        }
+    }
     return (
         <>
             <div className="table-title my-2">
                 Quizzes table:
             </div>
-            <table className="table table-hover table-bordered">
+            <table className="table table-hover table-bordered ">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -64,6 +68,10 @@ const QuizDetailTable = (props) => {
                                     <td>{item.difficulty}</td>
                                     <td style={{ display: "flex", gap: "15px" }}>
                                         <button
+                                            className="btn btn-success"
+                                            onClick={() => handleClickEdit(item.id)}
+                                        >Edit</button>
+                                        <button
                                             className="btn btn-primary"
                                             onClick={() => handleClickShow(item.id)}
                                         >Show</button>
@@ -82,12 +90,20 @@ const QuizDetailTable = (props) => {
                     show={showDeleteModal}
                     setShow={setShowDeleteModal}
                     idDelete={idDelete}
+                    fetchAllQuiz={fetchAllQuiz}
                 />
                 <ModalShowQuiz
                     show={showShowQuizModal}
                     setShow={setShowShowQuizModal}
                     dataView={dataView}
                     setDataView={setDataView}
+                />
+                <ModalEditQuiz
+                    show={showShowEditModal}
+                    setShow={setShowShowEditModal}
+                    dataUpdate={dataUpdate}
+                    setDataUpdate={setDataUpdate}
+                    fetchAllQuiz={fetchAllQuiz}
                 />
             </table>
         </>

@@ -4,7 +4,7 @@ import { deleteQuiz } from '../../../../../services/apiServices';
 import { toast } from 'react-toastify';
 
 function ModalDeleteQuiz(props) {
-    const { show, setShow, idDelete } = props;
+    const { show, setShow, idDelete, fetchAllQuiz } = props;
 
     const handleClose = () => setShow(false);
 
@@ -13,6 +13,7 @@ function ModalDeleteQuiz(props) {
         if (data && data.EC === 0) {
             handleClose();
             toast.success(data.EM);
+            fetchAllQuiz();
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);

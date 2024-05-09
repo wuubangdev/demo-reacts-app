@@ -25,7 +25,7 @@ const ManageUser = (props) => {
 
     useEffect(() => {
         //fetchListUser();
-        fetchListUserPagination(1)
+        fetchListUserPagination(1);
     }, []);
 
     const fetchListUser = async () => {
